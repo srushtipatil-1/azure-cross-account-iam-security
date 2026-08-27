@@ -1,0 +1,15 @@
+﻿# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+
+# Azure / secrets
+*.pem
+*.key
+.env
+
+# OS
+.DS_Store
+Thumbs.db
