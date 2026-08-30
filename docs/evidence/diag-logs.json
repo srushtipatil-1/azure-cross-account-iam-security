@@ -1,0 +1,5 @@
+﻿[
+  {"category": "Administrative", "enabled": true},
+  {"category": "Security", "enabled": true},
+  {"category": "Policy", "enabled": true}
+]
