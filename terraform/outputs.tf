@@ -1,4 +1,4 @@
-﻿output "workload_resource_group_id" {
+output "workload_resource_group_id" {
   description = "Resource ID of the workload resource group"
   value       = azurerm_resource_group.workload.id
 }
