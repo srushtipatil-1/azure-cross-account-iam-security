@@ -30,51 +30,7 @@ In progress — currently through Phase 9 of 12.
 
 ## Architecture
 
-&#x20;                +---------------------------+
-
-&#x20;                ¦   Microsoft Entra ID       ¦
-
-&#x20;                ¦   (Tenant-wide identity)   ¦
-
-&#x20;                +---------------------------+
-
-&#x20;                              ¦
-
-&#x20;         +-----------------------------------------+
-
-&#x20;         ¦                                          ¦
-
-
-
-+-------------->-------------+ +---------------->---------------+
-
-¦ rg-cross-account-iam- ¦ ¦ rg-workload-environment ¦
-
-¦ security ¦ ¦ (Workload boundary) ¦
-
-¦ (Security/Admin boundary) ¦ ¦ ¦
-
-¦ ¦ ¦ RBAC Role Assignments: ¦
-
-¦ mi-workload-identity ¦---Reader--->¦ - SG-SecurityReviewers ¦
-
-¦ (Managed Identity) ¦ ¦ - mi-workload-identity ¦
-
-¦ ¦ ¦ ¦
-
-+----------------------------+ +--------------------------------+
-
-¦
-
-¦ monitored by
-
-->
-
-Azure Activity Log
-
-
-
-
+![Architecture Diagram](docs/images/architecture-diagram.png)
 
 Two Resource Groups within a single subscription simulate the AWS project's separate Security and Workload accounts. Access flows from Entra ID identities into the workload boundary through explicit, least-privilege RBAC role assignments — never through a shared "admin" role.
 
