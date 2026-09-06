@@ -36,3 +36,7 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: ./terraform
+          # Block the merge on HIGH or CRITICAL findings only; MEDIUM/LOW are
+          # reported in the run log but do not fail the job. soft_fail is left
+          # unset (defaults to false) so a HIGH/CRITICAL finding fails the step.
+          additional_args: --minimum-severity HIGH

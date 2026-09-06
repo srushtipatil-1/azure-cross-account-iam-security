@@ -8,7 +8,7 @@ A hands-on Azure security project translating an AWS cross-account IAM access pa
 
 ## Project Status
 
-In progress — currently through Phase 9 of 12.
+Complete — see [Known Limitations](#known-limitations) for the two scope boundaries not achievable on an Azure for Students subscription (documented, not left as open work). See [Results / Proof](#results--proof) for outstanding verification evidence.
 
 
 
@@ -196,17 +196,33 @@ Expected: exactly two Reader assignments, no broader roles.
 
 ## Security Testing Performed
 
-Full write-ups are in the `docs/` folder. Summary:
-
 - Simulated an over-privileged role assignment (Contributor added alongside Reader) — detected via role assignment audit, remediated
 
 - Simulated overly broad scope (subscription-level instead of resource-group-level) — detected using the `--all` flag on role assignment queries, remediated
 
+The full sign-off checklist for these tests and the rest of the security review is in [`docs/security-hardening-checklist.md`](docs/security-hardening-checklist.md).
 
+
+
+## GitHub & CI/CD Security
+
+- **Branch protection**: `main` requires a pull request before merging (no direct pushes).
+
+- **CI/CD pipeline** (`.github/workflows/terraform-security.yml`) runs on every push/PR to `main`:
+  1. `terraform fmt -check -recursive` — blocks on formatting drift.
+  2. `terraform init` / `terraform validate` — blocks on invalid configuration.
+  3. `tfsec` security scan, gated at `--minimum-severity HIGH` — blocks the run on any HIGH or CRITICAL finding; MEDIUM/LOW findings are reported in the log but do not fail the job.
+- This is a real gate, not a formality: an early version of this repo had a Terraform formatting issue that the pipeline correctly failed on (see commit history — `Fix Terraform formatting to pass terraform fmt -check in CI pipeline`), and the fix was verified locally before being confirmed passing in CI.
+
+
+
+## Results / Proof
+
+> Pending: this section needs a fresh `terraform plan` clean-state run and a current `az role assignment list` audit against the live subscription, plus a link/screenshot of the `terraform-security.yml` workflow passing on `main`. Not yet captured in this pass — see the summary at the end of this update for what's outstanding.
 
 ## Known Limitations
 
-- This project uses a single Azure subscription (Azure for Students); two Resource Groups simulate the multi-account boundary from the original AWS design
+- This project uses a single Azure subscription (Azure for Students); two Resource Groups simulate the multi-account boundary from the original AWS design (this is why Multi-Subscription Access above is a documented limitation rather than a completed phase)
 
 - Entra PIM and Conditional Access were evaluated but not deployed, as they require Entra ID P1/P2 licensing not included in this subscription tier
 
@@ -214,5 +230,18 @@ Full write-ups are in the `docs/` folder. Summary:
 
 ## Project Phases
 
-Orientation -> Azure Environment Setup -> Identity Architecture -> Multi-Subscription Access -> Azure RBAC -> Secure Identity -> Infrastructure as Code -> Security Monitoring -> Security Testing -> GitHub -> CI/CD Security -> Security Hardening -> Documentation
+| # | Phase | Status |
+|---|-------|--------|
+| 1 | Orientation | Done |
+| 2 | Azure Environment Setup | Done |
+| 3 | Identity Architecture | Done |
+| 4 | Multi-Subscription Access | Documented limitation — see [Known Limitations](#known-limitations) (single subscription on Azure for Students) |
+| 5 | Azure RBAC | Done |
+| 6 | Secure Identity | Done |
+| 7 | Infrastructure as Code | Done |
+| 8 | Security Monitoring | Done |
+| 9 | Security Testing | Done |
+| 10 | GitHub | Done — branch protection + PR-required workflow on `main` |
+| 11 | CI/CD Security | Done — `tfsec` gate in `.github/workflows/terraform-security.yml`, see [GitHub & CI/CD Security](#github--cicd-security) |
+| 12 | Security Hardening & Documentation | Done — see [`docs/security-hardening-checklist.md`](docs/security-hardening-checklist.md) and this README |
 
