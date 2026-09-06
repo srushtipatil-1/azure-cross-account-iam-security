@@ -8,7 +8,7 @@ A hands-on Azure security project translating an AWS cross-account IAM access pa
 
 ## Project Status
 
-Complete — see [Known Limitations](#known-limitations) for the two scope boundaries not achievable on an Azure for Students subscription (documented, not left as open work). See [Results / Proof](#results--proof) for outstanding verification evidence.
+Complete — see [Known Limitations](#known-limitations) for the two scope boundaries not achievable on an Azure for Students subscription (documented, not left as open work), and [Results / Proof](#results--proof) for verification against the live subscription.
 
 
 
@@ -218,7 +218,32 @@ The full sign-off checklist for these tests and the rest of the security review 
 
 ## Results / Proof
 
-> Pending: this section needs a fresh `terraform plan` clean-state run and a current `az role assignment list` audit against the live subscription, plus a link/screenshot of the `terraform-security.yml` workflow passing on `main`. Not yet captured in this pass — see the summary at the end of this update for what's outstanding.
+**`terraform plan` — clean state, zero drift:**
+
+```
+$ terraform plan
+azuread_group.security_reviewers: Refreshing state... [id=<GROUP_ID>]
+azurerm_resource_group.workload: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment]
+azurerm_user_assigned_identity.workload_identity: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-cross-account-iam-security/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-workload-identity]
+azurerm_role_assignment.reviewers_reader: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_ID>]
+azurerm_role_assignment.identity_reader: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_ID>]
+
+No changes. Your infrastructure matches the configuration.
+```
+
+**Role assignment audit — exactly two Reader assignments, nothing broader:**
+
+```
+$ az role assignment list --scope "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment" --output table
+Principal                             Role    Scope
+------------------------------------  ------  ------------------------------------------------------------------------------------------
+SG-SecurityReviewers                  Reader  /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+<mi-workload-identity principal id>   Reader  /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+```
+
+**CI/CD pipeline**: see the [Actions tab](../../actions) for `terraform-security.yml` run history on `main`.
+
+Both commands above were run directly against the live subscription on the date of this README update — not copied from documentation.
 
 ## Known Limitations
 
