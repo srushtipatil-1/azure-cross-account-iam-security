@@ -12,3 +12,8 @@ output "workload_identity_principal_id" {
   description = "Principal ID of the workload managed identity"
   value       = azurerm_user_assigned_identity.workload_identity.principal_id
 }
+
+output "security_resource_group_id" {
+  description = "Resource ID of the security/admin resource group"
+  value       = azurerm_resource_group.security.id
+}

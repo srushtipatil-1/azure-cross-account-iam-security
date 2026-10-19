@@ -52,6 +52,20 @@ Final review performed at the end of the project build, verifying consistency an
 
 
 
+## Detection & Evidence
+
+- [x] Scripted least-privilege audit (`scripts/audit-role-assignments.sh`) detects role or scope drift across all scopes and exits non-zero
+
+- [x] Over-privilege simulation, detection, remediation and re-verification captured in `docs/evidence/01-06`
+
+- [x] Role-assignment create/delete events exported from the Activity Log (`docs/evidence/07`)
+
+- [x] Managed identity effective permissions tested from a live workload: read allowed, write denied (`docs/evidence/08`)
+
+- [x] Both resource groups managed in Terraform (security RG imported)
+
+
+
 ## CI/CD Security
 
 - [x] GitHub Actions pipeline runs Terraform format check, validate, and tfsec security scan on every push/PR

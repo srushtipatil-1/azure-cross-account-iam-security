@@ -158,6 +158,8 @@ Import each manually-created resource so Terraform manages it going forward:
 
 ```bash
 
+terraform import azurerm_resource_group.security "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-cross-account-iam-security"
+
 terraform import azurerm_resource_group.workload "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment"
 
 terraform import azuread_group.security_reviewers "<GROUP_ID>"
@@ -201,6 +203,25 @@ Expected: exactly two Reader assignments, no broader roles.
 - Simulated overly broad scope (subscription-level instead of resource-group-level) — detected using the `--all` flag on role assignment queries, remediated
 
 The full sign-off checklist for these tests and the rest of the security review is in [`docs/security-hardening-checklist.md`](docs/security-hardening-checklist.md).
+
+
+
+### Reproducible Evidence (scripted)
+
+Every stage below is scripted and its output is committed under [`docs/evidence/`](docs/evidence/). Re-run everything with `./scripts/run-evidence.sh`.
+
+| Stage | Command | Evidence |
+|---|---|---|
+| Baseline | `scripts/audit-role-assignments.sh` | [01-baseline-audit.txt](docs/evidence/01-baseline-audit.txt) |
+| Simulate | `scripts/simulate-overprivilege.sh`: Contributor on workload RG (managed identity); Reader at subscription scope (reviewers group) | [02-simulation.txt](docs/evidence/02-simulation.txt) |
+| Detect | `scripts/audit-role-assignments.sh` exits 1 with 2 findings | [03-detection-audit.txt](docs/evidence/03-detection-audit.txt) |
+| Terraform blind spot | `terraform plan` reports "No changes" while the violations exist, because out-of-band assignments are not in Terraform state. This is why a separate audit is needed. | [04-terraform-plan-blind-spot.txt](docs/evidence/04-terraform-plan-blind-spot.txt) |
+| Remediate | `scripts/audit-role-assignments.sh --remediate` | [05-remediation.txt](docs/evidence/05-remediation.txt) |
+| Verify | `scripts/audit-role-assignments.sh` returns COMPLIANT | [06-post-remediation-audit.txt](docs/evidence/06-post-remediation-audit.txt) |
+| Activity Log | `scripts/export-activity-log.sh`: `roleAssignments/write` and `/delete` events, correlated with audit findings by role-assignment ID | [07-activity-log-role-events.json](docs/evidence/07-activity-log-role-events.json) |
+| Managed identity effective access | `terraform apply -var enable_identity_test=true`: an ACI logs in as `mi-workload-identity` with no secret; read allowed, write denied, only the workload RG visible | [08-mi-access-test.log](docs/evidence/08-mi-access-test.log) |
+
+Optional real-time detection: set `alert_email` in `terraform.tfvars` to deploy an Activity Log alert (`terraform/monitoring.tf`) that emails on any new role assignment.
 
 
 

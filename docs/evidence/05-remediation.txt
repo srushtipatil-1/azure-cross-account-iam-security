@@ -1,0 +1,20 @@
+Audit run : 2026-10-19T05:27:09Z  (remediate=true)
+Baseline  : exactly one 'Reader' at /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment per principal
+
+== SG-SecurityReviewers (db1aa815-313f-4d33-b2e4-89e1b49f9a6f) - 2 assignment(s)
+   Reader	/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+   Reader	/subscriptions/<SUBSCRIPTION_ID>
+   VIOLATION: 1 assignment(s) outside baseline
+     - Reader at /subscriptions/<SUBSCRIPTION_ID>
+       id: /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce
+     REMEDIATED: deleted /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce
+
+== mi-workload-identity (3ff8c9ed-a72b-45fb-9f15-9ed817c1922f) - 2 assignment(s)
+   Reader	/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+   Contributor	/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+   VIOLATION: 1 assignment(s) outside baseline
+     - Contributor at /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+       id: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e
+     REMEDIATED: deleted /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e
+
+RESULT: NON-COMPLIANT (2 finding(s)) - remediation attempted; re-run to confirm

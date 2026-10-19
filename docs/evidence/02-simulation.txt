@@ -1,0 +1,9 @@
+[2026-10-19T05:25:20Z] Misconfig 1: over-privileged role (Contributor) on workload RG for the managed identity
+Scope
+------------------------------------------------------------------------------------------
+/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+
+[2026-10-19T05:25:27Z] Misconfig 2: overly broad scope (Reader at SUBSCRIPTION) for the reviewers group
+Scope
+---------------------------------------------------
+/subscriptions/<SUBSCRIPTION_ID>

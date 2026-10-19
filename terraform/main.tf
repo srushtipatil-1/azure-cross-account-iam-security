@@ -3,6 +3,11 @@ resource "azurerm_resource_group" "workload" {
   location = var.location
 }
 
+resource "azurerm_resource_group" "security" {
+  name     = var.security_resource_group_name
+  location = var.location
+}
+
 resource "azuread_group" "security_reviewers" {
   display_name     = "SG-SecurityReviewers"
   security_enabled = true
