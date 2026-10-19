@@ -1,0 +1,66 @@
+[
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "f0029a57-0949-4ff8-8c23-c2230ddc0b10",
+    "operation": "Microsoft.Authorization/roleAssignments/delete",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e",
+    "status": "Succeeded",
+    "time": "2026-10-19T05:27:30.2053675Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "f0029a57-0949-4ff8-8c23-c2230ddc0b10",
+    "operation": "Microsoft.Authorization/roleAssignments/delete",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e",
+    "status": "Started",
+    "time": "2026-10-19T05:27:26.1896554Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "3fcaf2e6-90a4-49c0-a28e-040d968a6927",
+    "operation": "Microsoft.Authorization/roleAssignments/delete",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce",
+    "status": "Succeeded",
+    "time": "2026-10-19T05:27:19.9395041Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "3fcaf2e6-90a4-49c0-a28e-040d968a6927",
+    "operation": "Microsoft.Authorization/roleAssignments/delete",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce",
+    "status": "Started",
+    "time": "2026-10-19T05:27:15.8457926Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "76710d4b-5472-4aec-8b17-4b5eaa728fe2",
+    "operation": "Microsoft.Authorization/roleAssignments/write",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce",
+    "status": "Succeeded",
+    "time": "2026-10-19T05:25:31.4232674Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "76710d4b-5472-4aec-8b17-4b5eaa728fe2",
+    "operation": "Microsoft.Authorization/roleAssignments/write",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/roleAssignments/23bc38fe-0b67-4fdd-a187-b3e594e815ce",
+    "status": "Started",
+    "time": "2026-10-19T05:25:28.8920331Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "f2f91a5c-d028-4078-b769-807f6a58c3d6",
+    "operation": "Microsoft.Authorization/roleAssignments/write",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e",
+    "status": "Succeeded",
+    "time": "2026-10-19T05:25:26.5617127Z"
+  },
+  {
+    "caller": "<ADMIN_UPN>",
+    "correlationId": "f2f91a5c-d028-4078-b769-807f6a58c3d6",
+    "operation": "Microsoft.Authorization/roleAssignments/write",
+    "scope": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/a5b3f88d-3bd5-4fd1-bde5-e98a786bb02e",
+    "status": "Started",
+    "time": "2026-10-19T05:25:22.4991957Z"
+  }
+]

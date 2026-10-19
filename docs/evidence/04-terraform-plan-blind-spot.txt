@@ -1,0 +1,11 @@
+azuread_group.security_reviewers: Refreshing state... [id=db1aa815-313f-4d33-b2e4-89e1b49f9a6f]
+azurerm_resource_group.security: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-cross-account-iam-security]
+azurerm_resource_group.workload: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment]
+azurerm_user_assigned_identity.workload_identity: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-cross-account-iam-security/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-workload-identity]
+azurerm_role_assignment.reviewers_reader: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/0a7128c6-6ad5-4c32-bb80-54f031b31258]
+azurerm_role_assignment.identity_reader: Refreshing state... [id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment/providers/Microsoft.Authorization/roleAssignments/791b7eeb-2b00-43ac-add6-46b2d04d5e4c]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.

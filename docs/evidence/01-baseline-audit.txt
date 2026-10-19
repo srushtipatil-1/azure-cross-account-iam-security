@@ -1,0 +1,12 @@
+Audit run : 2026-10-19T05:25:07Z  (remediate=false)
+Baseline  : exactly one 'Reader' at /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment per principal
+
+== SG-SecurityReviewers (db1aa815-313f-4d33-b2e4-89e1b49f9a6f) - 1 assignment(s)
+   Reader	/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+   OK
+
+== mi-workload-identity (3ff8c9ed-a72b-45fb-9f15-9ed817c1922f) - 1 assignment(s)
+   Reader	/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/rg-workload-environment
+   OK
+
+RESULT: COMPLIANT

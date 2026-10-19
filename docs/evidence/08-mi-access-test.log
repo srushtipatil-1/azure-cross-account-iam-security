@@ -1,0 +1,14 @@
+== 1. Authenticate as managed identity (no stored credential)
+== 2. READ test on workload RG (expect success)
+Name                     Location
+-----------------------  ------------
+rg-workload-environment  centralindia
+RESULT: READ ALLOWED (expected)
+== 3. WRITE test on workload RG (expect AuthorizationFailed)
+ERROR: (AuthorizationFailed) The client 'fb89c340-9046-4547-aaf5-5c6879da8169' with object id '3ff8c9ed-a72b-45fb-9f15-9ed817c1922f' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/write' over scope '/subscriptions/<SUBSCRIPTION_ID>/resourcegroups/rg-workload-environment' or the scope is invalid. If access was recently granted, please refresh your credentials.
+Code: AuthorizationFailed
+Message: The client 'fb89c340-9046-4547-aaf5-5c6879da8169' with object id '3ff8c9ed-a72b-45fb-9f15-9ed817c1922f' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/write' over scope '/subscriptions/<SUBSCRIPTION_ID>/resourcegroups/rg-workload-environment' or the scope is invalid. If access was recently granted, please refresh your credentials.
+RESULT: WRITE DENIED (expected)
+== 4. SCOPE test: resource groups visible to this identity (expect only the workload RG)
+rg-workload-environment
+
