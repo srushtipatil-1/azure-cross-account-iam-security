@@ -2,7 +2,7 @@
 
 
 
-A hands-on Azure security project translating an AWS cross-account IAM access pattern into Azure-native identity and access management, using Microsoft Entra ID, Azure RBAC, Managed Identity, and Terraform.
+A hands-on Azure security project translating an AWS cross-account IAM access pattern into Azure-native identity and access management, using Microsoft Entra ID, Azure RBAC, Managed Identity, and Terraform. The access controls are mapped to ISO/IEC 27001:2022, SOC 2, NIST CSF 2.0 and the Microsoft cloud security benchmark, and the access review is documented as an audit control test.
 
 
 
@@ -23,6 +23,10 @@ Complete — see [Known Limitations](#known-limitations) for the two scope bound
 - Security monitoring via Azure Activity Log
 
 - Deliberate misconfiguration testing (over-privileged roles, overly broad scope) with detection and remediation
+
+- Compliance mapping of 10 controls to ISO/IEC 27001:2022, SOC 2, NIST CSF 2.0 and the Microsoft cloud security benchmark, each linked to its evidence
+
+- Access review written up as an audit workpaper (test of design, test of operating effectiveness, observations, conclusion)
 
 - Honest documentation of licensing limitations on a student subscription (e.g., PIM, Conditional Access)
 
@@ -225,6 +229,28 @@ Optional real-time detection: set `alert_email` in `terraform.tfvars` to deploy 
 
 
 
+## Compliance Mapping & Access Review
+
+The same work, viewed the way a GRC or IT audit team would review it.
+
+| Document | What it shows |
+|---|---|
+| [Control mapping](docs/compliance/control-mapping.md) | 10 controls (access, logging, change management) mapped to ISO/IEC 27001:2022 Annex A, SOC 2, NIST CSF 2.0 and the Microsoft cloud security benchmark, each linked to its evidence file; shared responsibility model and known gaps |
+| [Access review workpaper](docs/compliance/access-review-workpaper.md) | The role-assignment audit tested as a control: test of design, operating effectiveness with seeded violations, Activity Log completeness check, observations and conclusion |
+
+**Access review result (19 Oct 2026):** both seeded violations (Contributor on the workload RG; Reader at subscription scope) were detected, removed and re-verified as COMPLIANT within about 2 minutes. Each change is matched to its Activity Log `write` and `delete` event by role-assignment ID. Conclusion: **effective**.
+
+| Control area | ISO/IEC 27001:2022 | SOC 2 | NIST CSF 2.0 |
+|---|---|---|---|
+| Least privilege and access review | A.5.15, A.5.18, A.8.2 | CC6.1–CC6.3 | PR.AA-05 |
+| Workload identity without secrets | A.5.17, A.8.5 | CC6.1 | PR.AA-01 |
+| Logging and alerting | A.8.15, A.8.16 | CC7.2 | PR.PS-04, DE.CM-03 |
+| Change management (PR + CI gate) | A.8.32, A.8.4 | CC8.1 | PR.PS-01 |
+
+> Partial, illustrative mapping for a lab environment. Control titles are paraphrased; this is not a certification or a claim of compliance.
+
+
+
 ## GitHub & CI/CD Security
 
 - **Branch protection**: `main` requires a pull request before merging (no direct pushes).
@@ -290,4 +316,5 @@ Both commands above were run directly against the live subscription on the date 
 | 10 | GitHub | Done — branch protection + PR-required workflow on `main` |
 | 11 | CI/CD Security | Done — `tfsec` gate in `.github/workflows/terraform-security.yml`, see [GitHub & CI/CD Security](#github--cicd-security) |
 | 12 | Security Hardening & Documentation | Done — see [`docs/security-hardening-checklist.md`](docs/security-hardening-checklist.md) and this README |
+| 13 | Compliance Mapping & Audit Workpaper | Done — see [Compliance Mapping & Access Review](#compliance-mapping--access-review) |
 
